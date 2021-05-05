@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS Blackjack_db;
+CREATE DATABASE Blackjack_db;
