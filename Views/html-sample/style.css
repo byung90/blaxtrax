@@ -17,7 +17,7 @@ h3 {
 
 #game {
   background: transparent
-    url("blackjack_background.jpg") 0 0 no-repeat;
+    url("../../img/blackjack_background.jpg") 0 0 no-repeat;
   border-radius: 5px;
   color: #333;
   font: 14px/17px Helvetica, Arial, Verdana, sans-serif;
@@ -66,10 +66,10 @@ div[class*="card"] {
   width: 79px;
 }
 
-.down {
+/* .down {
   background: #b20000 url("https://www.clowerweb.com/cors/blackjack/card.png")
     center center no-repeat !important;
-}
+} */
 
 span.pos-0 {
   left: 0;
