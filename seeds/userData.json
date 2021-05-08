@@ -2,26 +2,31 @@
   {
     "name": "Dwyane",
     "email": "Dwyane@gmail.com",
-    "password": "123456"
+    "password": "123456",
+    "balance": 5000
   },
   {
     "name": "Philip",
     "email": "Philip@gmail.com",
-    "password": "123456"
+    "password": "123456",
+    "balance": 5000
   },
   {
     "name": "Caitlin",
     "email": "Caitlin@gmail.com",
-    "password": "123456"
+    "password": "123456",
+    "balance": 5000
   },
   {
     "name": "Taylor",
     "email": "Taylor@gmail.com",
-    "password": "123456"
+    "password": "123456",
+    "balance": 5000
   },
   {
     "name": "Ethan",
     "email": "Ethan@gmail.com",
-    "password": "123456"
+    "password": "123456",
+    "balance": 5000
   }
 ]
