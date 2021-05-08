@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlaxJax!</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="/project two/blaxtrax/Views/html sample/style.css"
+    />
+  </head>
+
+  <body>
+    <div style="background-image: src('./');">
+
+    <div class="flex-column justify-space-around">
+      <header class="display-flex justify-space-between align-center p-2">
+        <h1>BlackJax</h1>
+      </header>
+      <main class="container container-fluid mt-5">
+        <!-- Render the sub layout -->
+        <div id="wrapper">
+          <div id="game">
+            <div id="alert" class="alert alert-error hide"><span></span></div>
+            <div id="dealer">
+              <div id="dhand"></div>
+            </div>
+            <div id="player">
+              <div id="phand"></div>
+            </div>
+            <div id="money">
+              <span id="cash">Cash: $<span></span></span>
+              <div id="bank">Winnings: $<span></span></div>
+            </div>
+          </div>
+          <div id="actions">
+            <button id="deal" class="btn">Deal!</button>
+            <button id="hit" class="btn" disabled>Hit</button>
+            <button id="stand" class="btn" disabled>Stand</button>
+            <button id="double" class="btn" disabled>Double Down</button>
+            <button id="split" class="btn" disabled>Split</button>
+            <button id="insurance" class="btn" disabled>Insurance</button>
+            <strong>Wager:</strong> $<input
+              id="wager"
+              class="input-small"
+              type="text"
+            />
+          </div>
+        </div>
+        <div id="myModal" class="modal hide fade">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-hidden="true"
+            >
+              &times;
+            </button>
+            <h3>Out of cash!</h3>
+          </div>
+          <div class="modal-body">
+            <p>
+              You ran out of cash, but you spot an ATM nearby. Would you like to
+              withdraw another $1,000 and try your luck again?
+            </p>
+          </div>
+          <div class="modal-footer">
+            <a href="#" id="cancel" class="btn">Nah</a>
+            <a href="#" id="newGame" class="btn btn-primary">Yes!</a>
+          </div>
+        </div>
+
+        <script
+          src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+          integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+          crossorigin="anonymous"
+        ></script>
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+          crossorigin="anonymous"
+        ></script>
+        <script src="/project two/blaxtrax/Views/html sample/game.js"></script>
+      </main>
+      <footer></footer>
+    </div>
+  </body>
+</html>
