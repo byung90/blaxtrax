@@ -37,14 +37,52 @@ router.get("/profile", withAuth, async (req, res) => {
     console.log(userData);
     const user = userData.get({ plain: true });
     console.log(user);
+    const topFive = await User.findAll({
+      limit: 5,
+      order: [["balance", "DESC"]], //ASC
+    });
+    const balanceObj = topFive.map((obj) => obj.get({ plain: true }));
+    console.log(balanceObj);
+
+    const loser = await User.findAll({
+      limit: 1,
+      order: [["balance", "ASC"]], //ASC
+    });
+    const loserObj = loser.map((obj) => obj.get({ plain: true }));
+    console.log(loserObj);
+
     res.render("profile", {
       ...user,
+      balanceObj,
+      loserObj,
       logged_in: true,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
+//table game
+
+// router.get("/profile", async (req, res) => {
+//   console.log("Hello");
+//   try {
+//     const userData = await User.findByPk(req.session.user_id, {
+//             attributes: { exclude: ["password"] },
+//     });
+//     const topFive = await User.findAll({
+//       limit: 5,
+//       order: [["balance", "DESC"]], //ASC
+//     });
+//     const balanceObj = topFive.map((obj) => obj.get({ plain: true }));
+//     console.log(balanceObj);
+//     res.render("profile", {
+//       balanceObj,
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 router.get("/login", (req, res) => {
   // If the user is already logged in, redirect the request to another route
