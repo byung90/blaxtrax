@@ -17,11 +17,11 @@ h3 {
 
 #game {
   background: transparent
-    url("https://www.clowerweb.com/cors/blackjack/table.png") 0 0 no-repeat;
+    url("blackjack_background.jpg") 0 0 no-repeat;
   border-radius: 5px;
   color: #333;
   font: 14px/17px Helvetica, Arial, Verdana, sans-serif;
-  height: 550px;
+  height: 600px;
   margin: 0 auto;
   position: relative;
   width: 1000px;
@@ -144,7 +144,7 @@ input#wager {
 #bank {
   color: #fff;
   font: 700 18px/20px Helvetica, Arial, Verdana, sans-serif;
-  margin: 12px 0;
+  margin: 3px 0;
   position: relative;
   text-shadow: 1px 1px #000;
   z-index: 1;
