@@ -20,7 +20,7 @@ Balance.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    User_id: {
+    user_id: {
       type: DataTypes.INTEGER,
       references: {
         model: "User",
