@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Table extends Model { }
+class Bet extends Model { }
 
-Table.init(
+Bet.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -11,13 +11,17 @@ Table.init(
       primaryKey: true,
       autoIncrement: true
     },
-    min_bet: {
-      type: DataTypes.INTEGER,
+    amount: {
+      type: DataTypes.DECIMAL,
       allowNull: false
     },
-    round_number: {
+    tablePlayer_id: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'tablePlayer',
+        key: 'id'
+      }
     }
   },
   {
@@ -25,8 +29,8 @@ Table.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'table'
+    modelName: 'bet'
   }
 )
 
-module.exports = Table;
+module.exports = Bet;
