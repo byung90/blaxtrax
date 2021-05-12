@@ -1,47 +1,53 @@
 
-<div class="row">
+<div class="form">
   <div class="col-auto">
     <h2>Welcome, {{name}}!</h2>
   </div>
 </div>
 
 
-<div class="row mt-4">
-  <div class="col-md-6">
+<div class="">
+  <div class="form">
     <form class="form new-project-form">
       <div class="form-group">
-        <h1>{{balance}}</h1>
+        <h1>Your Current Balance: <span style="color: Gold;"> {{balance}}</span></h1>
       </div>
       <div class="form-group">
-        <button>start game</button>
+        <button id="startGameBtn">start game</button>
       </div>
       <div class="form-group">
-        <div>
-          {{#each balanceObj as |balance|}}
-          <div class="row">
-            <div class="col-auto">
-              <h2> {{balance.name}}!</h2>
-              <h2>{{balance.balance}}</h2>
-            </div>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <h2 > 
+              <span style="color: Gold  ;" class="fas fa-crown"></span> 
+              Leader Board 
+            </h2>
+            <ul class="list-group"></ul>
+            {{#each balanceObj as |balance|}}
+                <li class="list-group-item"> {{balance.name}} !</li>
+                <li class="list-group-item">Balance: {{balance.balance}}</li>
+            {{/each}}
+            </ul>
           </div>
-          {{/each}}
+          <div class="form-group col-md-6">
+            <h2 > 
+              <span style="color: #7b5c00 ;" class="fas fa-poop "></span> 
+              Loser Board 
+            </h2>
+              <ul class="list-group">
+              {{#each loserObj as |balance|}}
+                  <li class="list-group-item"> {{balance.name}} !</li>
+                  <li class="list-group-item">Balance: {{balance.balance}}</li>
+              {{/each}}
+              </ul>
+        </div>
         </div>
       </div>
-      <div class="form-group">
-        <div>
-          {{#each loserObj as |balance|}}
-          <div class="row">
-            <div class="col-auto">
-              <h2> {{balance.name}}!</h2>
-              <h2>{{balance.balance}}</h2>
-            </div>
-          </div>
-          {{/each}}
-        </div>
-      </div>
-      <div class="form-group">
-        <h1>Maybe user can post selfie as image</h1>
-      </div>
+  </div>    
+  <footer class="form-group footer">
+    <h1>Spend more time studying.</h1>
+    <p>Copyright &copy; 2021 &mdash; Team BlaxJax</p>
+  </footer>
       
     </form>
   </div>
