@@ -1,10 +1,12 @@
 const router = require("express").Router();
 const userRoutes = require("./userRoutes");
-const LeaderRoutes = require("./leaderBoard");
-const tableGame = require("./tableGame");
+const leaderRoutes = require("./leaderBoard");
+const gameRoutes = require("./gameRoutes");
+const cardRoutes = require("./cardRoutes");
 
 router.use("/users", userRoutes);
-router.use("/leaderBoard", LeaderRoutes);
-//router.use("/tableGame", tableGame);
+router.use("/leaderBoard", leaderRoutes);
+router.use("/gameRoutes", gameRoutes);
+router.use("/card", cardRoutes);
 
 module.exports = router;
