@@ -73,11 +73,6 @@ Card.init(
         isNumeric: true
       }
     },
-    isRevealed: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: false
-    },
     hand_id: {
       type: DataTypes.INTEGER,
       allowNull: false,

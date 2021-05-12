@@ -22,6 +22,20 @@ Bet.init(
         model: 'tablePlayer',
         key: 'id'
       }
+    },
+    hand_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'hand',
+        key: 'id'
+      }
+    },
+    result: {
+      type: DataTypes.STRING,
+      validate: {
+        isIn: [['win', 'draw', 'lose']]
+      }
     }
   },
   {

@@ -1,9 +1,11 @@
 const router = require("express").Router();
-const { User } = require("../../models");
+const { User, TablePlayer, Table, Bet, Hand, Card } = require("../../models");
 
-router.get("/", async (req, res) => {
+//deal card
+router.get("/gameStart", async (req, res) => {
   try {
-  } catch (err) {}
+
+  } catch (err) { }
 });
 
 //need get the user date (current balance.)
