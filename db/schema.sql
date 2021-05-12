@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS Blackjack_db;
-CREATE DATABASE Blackjack_db;
+DROP DATABASE IF EXISTS blackjack_db;
+CREATE DATABASE blackjack_db;

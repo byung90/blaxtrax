@@ -21,7 +21,7 @@ TablePlayer.belongsTo(Table, {
 })
 
 //Table hasMany TablePlayers
-Table.hasMany(TablePlayers, {
+Table.hasMany(TablePlayer, {
   foreignKey: 'table_id'
 })
 
@@ -45,15 +45,17 @@ Hand.hasOne(Bet, {
   foreignKey: 'hand_id'
 })
 
+// Card belongsTo Hand
+Card.belongsTo(Hand, {
+  foreignKey: 'hand_id'
+})
+
 //Hand hasMany Cards
 Hand.hasMany(Card, {
   foreignKey: 'hand_id'
 })
 
-// Card belongsTo Hand
-Card.belongsTo(Hand, {
-  foreignKey: 'hand_id'
-})
+
 
 module.exports = {
   User,

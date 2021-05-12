@@ -75,7 +75,6 @@ Card.init(
     },
     hand_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       references: {
         model: 'hand',
         key: 'id'
