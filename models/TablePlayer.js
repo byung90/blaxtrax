@@ -1,40 +1,40 @@
 const { Model, DataTypes } = require("sequelize");
-const bcrypt = require("bcrypt");
 const sequelize = require("../config/connection");
 
-class Balance extends Model {
-  checkPassword(loginPw) {
-    return bcrypt.compareSync(loginPw, this.password);
-  }
-}
+class TablePlayer extends Model { }
 
-Balance.init(
+TablePlayer.init(
   {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
-    balance: {
+    table_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: 'table',
+        key: 'id'
+      }
     },
     user_id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
-        model: "User",
-        key: "id",
-      },
-    },
+        model: 'user',
+        key: 'id'
+      }
+    }
   },
   {
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "balance",
+    modelName: 'tablePlayer'
   }
-);
+)
 
-module.exports = Balance;
+module.exports = TablePlayer;

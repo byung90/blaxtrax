@@ -1,23 +1,43 @@
+
 <div class="row">
   <div class="col-auto">
     <h2>Welcome, {{name}}!</h2>
   </div>
 </div>
 
+
 <div class="row mt-4">
   <div class="col-md-6">
     <form class="form new-project-form">
       <div class="form-group">
-        <h1>Current balance</h1>
+        <h1>{{balance}}</h1>
       </div>
       <div class="form-group">
         <button>start game</button>
       </div>
       <div class="form-group">
-        <h1>leaderboard</h1>
+        <div>
+          {{#each balanceObj as |balance|}}
+          <div class="row">
+            <div class="col-auto">
+              <h2> {{balance.name}}!</h2>
+              <h2>{{balance.balance}}</h2>
+            </div>
+          </div>
+          {{/each}}
+        </div>
       </div>
       <div class="form-group">
-        <h1>Loserboard</h1>
+        <div>
+          {{#each loserObj as |balance|}}
+          <div class="row">
+            <div class="col-auto">
+              <h2> {{balance.name}}!</h2>
+              <h2>{{balance.balance}}</h2>
+            </div>
+          </div>
+          {{/each}}
+        </div>
       </div>
       <div class="form-group">
         <h1>Maybe user can post selfie as image</h1>
@@ -26,22 +46,6 @@
     </form>
   </div>
 
-  {{#if User.balance}}
-  <div class="col-md-6 project-list">
-    <h3>Current Balance:{{User.balance}}</h3>
-
-    {{#each projects as |project|}}
-    <div class="row mb-2">
-      <div class="col-md-8">
-        <h4><a href="/project/{{project.id}}">{{project.name}}</a></h4>
-      </div>
-      <div class="col-md-4">
-        <button class="btn btn-sm btn-danger" data-id="{{project.id}}">DELETE</button>
-      </div>
-    </div>
-    {{/each}}
-  </div>
-  {{/if}}
 </div>
 
 <script src="./js/profile.js"></script>
