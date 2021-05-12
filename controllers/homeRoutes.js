@@ -94,4 +94,8 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
+router.get("/tableGame", (req, res) => {
+  res.redirect("/tableGame");
+});
+
 module.exports = router;
