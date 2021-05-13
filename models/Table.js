@@ -18,6 +18,11 @@ Table.init(
     round_number: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    is_in_round: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
   },
   {

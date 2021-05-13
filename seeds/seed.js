@@ -2,8 +2,8 @@ const sequelize = require("../config/connection");
 const { User } = require("../models");
 const userData = require("./userData.json");
 const dealerData = require("./dealerUserData.json");
-const seedTables = require("./tables-seed.js")
-const seedTablePlayers = require("./tables-seed.js")
+const seedTables = require("./tables-seed.js");
+const seedTablePlayers = require("./tablePlayer-seeds.js");
 
 
 const seedDatabase = async () => {
