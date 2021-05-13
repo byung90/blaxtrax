@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { User, TablePlayer, Table, Bet, Hand, Card } = require("../../models");
-const { createHands, getTable, createBets, getCard, getUniqueCard } = require('../../utils/deal');
+const { createHands, getTable, createBets, getCard, getUniqueCard, isDeckPlayable } = require('../../utils/deal');
 
 function sortByProperty(property) {
   return function (a, b) {
@@ -300,6 +300,18 @@ router.post('/add-card', async (req, res) => {
     }
 
     res.status(200).json(responseObject);
+  }
+  catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Is deck playable - If cards left in deck are less than 10, it cannot be played
+router.get('/:id/isPlayable', async (req, res) => {
+  // :id is table Id
+  try {
+    const playable = await isDeckPlayable(req.params.id);
+    res.status(200).json(playable);
   }
   catch (err) {
     res.status(500).json(err);

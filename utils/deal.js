@@ -116,10 +116,48 @@ const getUniqueCard = async (tableId) => {
   }
 }
 
+// check if deck can be continued
+const isDeckPlayable = async (tableId) => {
+  try {
+    const allUsedCardsinTable = await Card.count({
+      include: [
+        {
+          model: Hand, include: [
+            {
+              model: Bet, include: [
+                {
+                  model: TablePlayer, include: [
+                    {
+                      model: Table, where: {
+                        id: tableId
+                      }
+                    }
+                  ],
+                },
+              ]
+            },
+          ]
+        },
+      ]
+    })
+
+    if (52 - allUsedCardsinTable < 10) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+  catch (err) {
+    return err;
+  }
+}
+
 module.exports = {
   createHands,
   getTable,
   createBets,
   getUniqueCard,
-  getCard
+  getCard,
+  isDeckPlayable
 };
