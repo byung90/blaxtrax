@@ -14,7 +14,7 @@ const newHand = async () => {
 const getTable = async (id) => {
   try {
     const tableData = await Table.findByPk(id, {
-      include: [{ model: TablePlayer }]
+      include: [{ model: TablePlayer, include: [{ model: User, attributes: ['id', 'name', 'balance'] }] }]
     })
     return tableData;
   }
@@ -24,5 +24,6 @@ const getTable = async (id) => {
 }
 
 module.exports = {
-  newHand
+  newHand,
+  getTable
 };
