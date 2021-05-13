@@ -10,6 +10,14 @@ Hand.init(
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
+    },
+    bet_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'bet',
+        key: 'id'
+      }
     }
   },
   {
