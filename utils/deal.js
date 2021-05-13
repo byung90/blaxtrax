@@ -4,6 +4,7 @@ const newHand = async () => {
   try {
     const handData = await Hand.create({});
     return handData;
+
   }
   catch (err) {
     return (err);

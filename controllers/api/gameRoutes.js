@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { User, TablePlayer, Table, Bet, Hand, Card } = require("../../models");
+
 const newHand = require('../../utils/deal');
 
 //create hand object to start game
@@ -22,6 +23,7 @@ router.post("/gameStart", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+
 });
 
 
@@ -29,4 +31,5 @@ router.post("/gameStart", async (req, res) => {
 //need get the user date (current balance.)
 //need post new date after user won/lose, and update DB user balance
 //
+
 module.exports = router;

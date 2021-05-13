@@ -1,0 +1,144 @@
+html,
+body {
+  font-family: "Fredoka One", cursive, "Times New Roman", Times, serif;
+  height: 100%;
+  font-size: x-large;
+}
+
+body.my-login-page {
+  background-color: #f7f9fb;
+  font-size: 14px;
+}
+
+a {
+  color: #00ff9d70;
+}
+
+.p-2 {
+  text-align: center !important;
+}
+
+h2 {
+  text-align: center;
+}
+
+#leftColbox {
+  border-right: 2px solid black;
+}
+
+.my-login-page .brand {
+  width: 90px;
+  height: 90px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 40px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 1;
+}
+
+.my-login-page .brand img {
+  width: 100%;
+}
+
+.my-login-page .card-wrapper {
+  width: 400px;
+}
+
+.my-login-page .card {
+  border-color: transparent;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.my-login-page .card.fat {
+  padding: 10px;
+}
+
+.my-login-page .card .card-title {
+  margin-bottom: 30px;
+}
+
+.my-login-page .form-control {
+  border-width: 2.3px;
+}
+
+.my-login-page .form-group label {
+  width: 100%;
+}
+
+.form-group {
+  text-align: center;
+}
+
+.my-login-page .btn.btn-block {
+  padding: 12px 10px;
+}
+
+.my-login-page .footer {
+  margin: 40px 0;
+  color: #888;
+  text-align: center;
+}
+
+.btn {
+  width: 17rem;
+  color: #434343;
+  background-color: #00ff9d70;
+  border-color: #00ff9d70;
+  border-radius: 10rem;
+}
+
+#logout,
+#startGameBtn {
+  color: #434343;
+  background-color: #00ff9d70;
+  border-color: #00ff9d70;
+  border-radius: 10rem;
+}
+
+#startGameBtn {
+  font-size: 2rem;
+  width: 30rem;
+  height: 3rem;
+}
+
+a:hover,
+#logout:hover,
+#startGameBtn:hover {
+  color: #434343;
+  letter-spacing: 1px;
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  box-shadow: 5px 40px -10px rgba(0, 0, 0, 0.57);
+  transition: all 0.4s ease 0s;
+}
+
+.btn:hover {
+  background: #434343;
+  letter-spacing: 1px;
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  box-shadow: 5px 40px -10px rgba(0, 0, 0, 0.57);
+  transition: all 0.4s ease 0s;
+}
+
+.footer {
+  padding-bottom: 200px;
+}
+
+@media screen and (max-width: 425px) {
+  .my-login-page .card-wrapper {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .my-login-page .card.fat {
+    padding: 0;
+  }
+
+  .my-login-page .card.fat .card-body {
+    padding: 15px;
+  }
+}

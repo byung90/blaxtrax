@@ -45,7 +45,7 @@ router.get("/profile", withAuth, async (req, res) => {
     console.log(balanceObj);
 
     const loser = await User.findAll({
-      limit: 1,
+      limit: 5,
       order: [["balance", "ASC"]], //ASC
     });
     const loserObj = loser.map((obj) => obj.get({ plain: true }));
