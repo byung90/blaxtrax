@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Dealer 1",
+    "email": "dealer1@blaxtrax.com",
+    "password": "supersecure",
+    "balance": 5000
+  },
+  {
+    "name": "Dealer 2",
+    "email": "dealer2@blaxtrax.com",
+    "password": "supersecure",
+    "balance": 5000
+  },
+  {
+    "name": "Dealer 3",
+    "email": "dealer3@blaxtrax.com",
+    "password": "supersecure",
+    "balance": 5000
+  },
+  {
+    "name": "Dealer 4",
+    "email": "dealer4@blaxtrax.com",
+    "password": "supersecure",
+    "balance": 5000
+  },
+  {
+    "name": "Dealer 5",
+    "email": "dealer5@blaxtrax.com",
+    "password": "supersecure",
+    "balance": 5000
+  },
+  {
+    "name": "Dealer 6",
+    "email": "dealer6@blaxtrax.com",
+    "password": "supersecure",
+    "balance": 5000
+  },
+  {
+    "name": "Dealer 7",
+    "email": "dealer7@blaxtrax.com",
+    "password": "supersecure",
+    "balance": 5000
+  },
+  {
+    "name": "Dealer 8",
+    "email": "dealer8@blaxtrax.com",
+    "password": "supersecure",
+    "balance": 5000
+  }
+]

@@ -35,6 +35,6 @@ const tableData = [
   },
 ];
 
-const seedTables = () => Table.bulkCreate(tableData);
+const seedTables = async () => Table.bulkCreate(tableData);
 
 module.exports = seedTables;
