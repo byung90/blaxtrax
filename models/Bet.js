@@ -28,6 +28,13 @@ Bet.init(
       validate: {
         isIn: [['win', 'draw', 'lose', 'dealer', 'inPlay']]
       }
+    },
+    position: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        isNumeric: true
+      }
     }
   },
   {
