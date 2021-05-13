@@ -3,9 +3,11 @@ const { User, TablePlayer, Table, Bet, Hand, Card } = require("../../models");
 const newHand = require('../../utils/deal');
 
 //deal card
-router.get("/gameStart", newHand, async (req, res) => {
+router.post("/gameStart", async (req, res) => {
   try {
-
+    const hand_id = await newHand();
+    console.log('done');
+    res.status(200).json(hand_id);
   } catch (err) { }
 });
 
