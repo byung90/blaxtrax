@@ -78,15 +78,13 @@ router.get("/table/:id", async (req, res) => {
       isDealerCardRevealed: isDealerCardRevealed
     }
 
-
-
     res.status(200).json(returnData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Get load game if table is in game
+// Get load game if table is in game (NOT MVP)
 router.get('/loadInGame', async (req, res) => {
   try {
     /* 
@@ -131,7 +129,7 @@ router.get('/loadInGame', async (req, res) => {
   }
 })
 
-//Deal first hand
+// Deal first hand
 router.post('/makeBets', async (req, res) => {
   /* 
   example req body:
@@ -277,10 +275,34 @@ router.post('/makeBets', async (req, res) => {
     res.status(500).json(err);
   }
 })
-//create hands for dealer and TablePlayer(s)
 
-//create bets for dealer and TablePlayer(s) - dealer will have 0 bet amount and result will always be 'dealer'
+// Add a card
+router.post('/add-card', async (req, res) => {
+  /* 
+  example request body:
+  {
+    "tableId": 1,
+    "handId": 1
+  }
+  */
+  try {
+    const uniqueCardIndex = await getUniqueCard(req.body.tableId);
+    const cardToCreate = {
+      hand_id: req.body.handId,
+      cardArrayIndex: uniqueCardIndex
+    }
+    const createdCardData = await getCard(cardToCreate);
+    const newCardIndex = createdCardData.cardArrayIndex;
 
-//deal cards to all players
+    const responseObject = {
+      newCardIndex: newCardIndex
+    }
+
+    res.status(200).json(responseObject);
+  }
+  catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;
