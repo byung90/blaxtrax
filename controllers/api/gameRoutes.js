@@ -13,6 +13,24 @@ function sortByProperty(property) {
   }
 }
 
+function findByProp(o, prop, val, retprop) {
+  if (o == null) return false;
+  if (o[prop] === val) {
+    return (retprop) ? o[retprop] : o;
+  }
+  var result, p;
+  for (p in o) {
+    if (o.hasOwnProperty(p) && typeof o[p] === 'object') {
+      result = findByProp(o[p], prop, val);
+      if (result) {
+        return (retprop) ? result[retprop] : result;
+      }
+    }
+  }
+  return (retprop) ? result[retprop] : result;
+}
+
+
 const cardArrayMap = ['CA', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C10', 'CJ', 'CQ', 'CK', 'DA', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10', 'DJ', 'DQ', 'DK', 'HA', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10', 'HJ', 'HQ', 'HK', 'SA', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9', 'S10', 'SJ', 'SQ', 'SK'];
 
 //Get basic table info and players in the game.
@@ -59,6 +77,8 @@ router.get("/table/:id", async (req, res) => {
       isInGame: isInGame,
       isDealerCardRevealed: isDealerCardRevealed
     }
+
+
 
     res.status(200).json(returnData);
   } catch (err) {
@@ -120,22 +140,71 @@ router.post('/makeBets', async (req, res) => {
     tablePlayers: [
       {
         id: 1,
-        bet_amount: 0
+        bet_amount: 0,
+        position: 0
       },
       {
         id: 9,
-        bet_amount: 50
+        bet_amount: 50,
+        position: 1
       }
+    ]
+  }
+  =====================
+  example response object
+  {
+    tablePlayer: [
+      {
+        id: 1,
+        bet: {
+          id: 9,
+          amount: 0,
+          position: 0,
+          result: 'inPlay'
+        },
+        hand:{
+          id: 20,
+          cardIndexes: [0,51]
+        }
+      },
+      {
+        id: 8,
+        bet: {
+          id: 10,
+          position: 1,
+          amount: 50,
+          result: 'inPlay'
+        },
+        hand:{
+          id: 21,
+          cardIndexes: [2,33]
+        }
+      },
     ]
   }
   */
   try {
+    // response object
+    let responseObject = {
+      tablePlayers: [
+        {
+          id: req.body.tablePlayers[0].id
+        },
+        {
+          id: req.body.tablePlayers[1].id
+        }
+      ]
+    };
+
+    console.log(responseObject);
+
     // create Bets for TablePlayer(s)
     let betsToCreate = [];
     for (let i = 0; i < req.body.tablePlayers.length; i++) {
       betsToCreate[i] = {
         amount: req.body.tablePlayers[i].bet_amount,
-        tablePlayer_id: req.body.tablePlayers[i].id
+        tablePlayer_id: req.body.tablePlayers[i].id,
+        position: req.body.tablePlayers[i].position
       }
       if (req.body.tablePlayers[i].id < 9) {
         betsToCreate[i].result = 'dealer'
@@ -147,7 +216,7 @@ router.post('/makeBets', async (req, res) => {
     const betsData = await createBets(betsToCreate);
 
     const betsCleanData = betsData.map(x => x.get({ plain: true }));
-    betsCleanData.sort(sortByProperty('tablePlayer_id'));
+    betsCleanData.sort(sortByProperty('position'));
     console.log("bets:")
     console.log(betsCleanData);
 
@@ -159,6 +228,7 @@ router.post('/makeBets', async (req, res) => {
         bet_id: betsCleanData[i].id
       }
     }
+
     console.log("hands:")
     console.log(handsToCreate);
     const handsData = await createHands(handsToCreate);
@@ -167,9 +237,6 @@ router.post('/makeBets', async (req, res) => {
 
     //deal cards to hands
     let cleanCardData = [];
-    // const randomCardIndex = await getUniqueCard(req.body.tableId)
-    // console.log(randomCardIndex);
-    // console.log(req.body.tableId);
     for (let i = 0; i < handsCleanData.length; i++) {
       for (let j = 0; j < 2; j++) {
         const randomCardIndex = await getUniqueCard(req.body.tableId)
@@ -183,10 +250,28 @@ router.post('/makeBets', async (req, res) => {
         cleanCardData.push(cardsData.get({ plain: true }));
       }
     }
-
     console.log(cleanCardData);
 
-    res.status(200).json(cleanCardData);
+    betsCleanData.forEach((bet) => {
+      const findHand = handsCleanData.find(hand => hand.bet_id === bet.id);
+      responseObject.tablePlayers[bet.position].bet = {
+        id: bet.id,
+        position: bet.position,
+        amount: bet.amount,
+        result: bet.result
+      }
+      responseObject.tablePlayers[bet.position].hand = {
+        id: findHand.id
+      }
+      let findCards = cleanCardData.filter(card => card.hand_id === findHand.id);
+      findCards.sort(sortByProperty('id'));
+
+      const findCardIndexs = findCards.map(card => card.cardArrayIndex);
+
+      responseObject.tablePlayers[bet.position].hand.cards = findCardIndexs;
+    });
+
+    res.status(200).json(responseObject);
   }
   catch (err) {
     res.status(500).json(err);
