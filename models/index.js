@@ -25,8 +25,8 @@ Table.hasMany(TablePlayer, {
   foreignKey: 'table_id'
 })
 
-//TablePlayer hasOne bet
-TablePlayer.hasOne(Bet, {
+//TablePlayer hasMany bets
+TablePlayer.hasMany(Bet, {
   foreignKey: 'tablePlayer_id'
 })
 
@@ -35,14 +35,14 @@ Bet.belongsTo(TablePlayer, {
   foreignKey: 'tablePlayer_id'
 })
 
-//Bet belongsTo Hand
-Bet.belongsTo(Hand, {
-  foreignKey: 'hand_id'
+//Bet hasOne Hand
+Bet.hasOne(Hand, {
+  foreignKey: 'bet_id'
 })
 
-//Hand hasOne Bet
-Hand.hasOne(Bet, {
-  foreignKey: 'hand_id'
+//Hand belongsTo Bet
+Hand.belongsTo(Bet, {
+  foreignKey: 'bet_id'
 })
 
 // Card belongsTo Hand
