@@ -1,15 +1,27 @@
-const { Hand } = require('../models');
+const { Hand, Bet, Table, TablePlayer, User } = require('../models');
 
-const newHand = async (req, res, next) => {
+const newHand = async () => {
   try {
-    console.log('test');
     const handData = await Hand.create({});
-    console.log(handData);
-    res.end();
+    return handData;
   }
   catch (err) {
-    return res.status(400).json(err);
+    return (err);
   }
 }
 
-module.exports = newHand;
+const getTable = async (id) => {
+  try {
+    const tableData = await Table.findByPk(id, {
+      include: [{ model: TablePlayer }]
+    })
+    return tableData;
+  }
+  catch (err) {
+    return (err);
+  }
+}
+
+module.exports = {
+  newHand
+};

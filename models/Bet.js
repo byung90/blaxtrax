@@ -34,7 +34,7 @@ Bet.init(
     result: {
       type: DataTypes.STRING,
       validate: {
-        isIn: [['win', 'draw', 'lose']]
+        isIn: [['win', 'draw', 'lose', 'dealer']]
       }
     }
   },
