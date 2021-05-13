@@ -11,6 +11,15 @@ const newHand = async () => {
   }
 }
 
+const getAllHandsInTable = async (tableId) => {
+  try {
+
+  }
+  catch (err) {
+
+  }
+}
+
 const getTable = async (id) => {
   try {
     const tableData = await Table.findByPk(id, {
