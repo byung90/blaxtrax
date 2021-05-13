@@ -23,6 +23,10 @@ Table.init(
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
+    },
+    is_dealer_card_revealed: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   },
   {
