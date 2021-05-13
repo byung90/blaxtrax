@@ -17,7 +17,6 @@ Bet.init(
     },
     tablePlayer_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       references: {
         model: 'tablePlayer',
         key: 'id'
