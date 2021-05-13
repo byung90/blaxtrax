@@ -6,6 +6,7 @@ const newHand = async (req, res, next) => {
     const handData = await Hand.create({});
     console.log(handData);
     res.end();
+
   }
   catch (err) {
     return res.status(400).json(err);

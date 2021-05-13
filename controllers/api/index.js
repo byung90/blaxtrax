@@ -5,6 +5,7 @@ const gameRoutes = require("./gameRoutes");
 const cardRoutes = require("./cardRoutes");
 const handRoutes = require("./handRoutes");
 
+
 router.use("/users", userRoutes);
 router.use("/leaderBoard", leaderRoutes);
 router.use("/gameRoutes", gameRoutes);
