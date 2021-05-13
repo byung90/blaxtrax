@@ -10,33 +10,6 @@ const createHands = async (hands) => {
   }
 }
 
-const getAllHandsInTable = async (tableId) => {
-  try {
-    const handData = await Table.findByPk(tableId, {
-      include: [
-        {
-          model: TablePlayer, include: [
-            {
-              model: Bet, include: [
-                {
-                  model: Hand, include: [
-                    {
-                      model: Card
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    })
-  }
-  catch (err) {
-
-  }
-}
-
 const getTable = async (id) => {
   try {
     const tableData = await Table.findByPk(id, {
