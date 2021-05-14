@@ -1,60 +1,59 @@
-<body>
-    <div class = "flex-column justify-space-around container">
-        <main class="container container-fluid mt-5">
-            <div id="wrapper">
+<div class="flex-column justify-space-around container">
+  <main class="container container-fluid mt-5">
+    <div id="wrapper">
 
-              <div id="game-container">
-                <div id="dealer-container">
-                  <h3>Dealer</h3>
-                  <div id="dealer-hand"></div>
-                </div>
-                <div id="player-container">
-                  <h3>Player</h3>
-                  <div id="player-hand"></div>
-                </div>
-                <div id="cash">
-                  <div id="balance">Balance: {{User.balance}} </div>
-                  <div id="winnings">Amount Won: </div>
-                </div>
-              </div>
+      <div id="game-container">
+        <div id="dealer-container">
+          <h3>Dealer</h3>
+          <div id="dealer-hand"></div>
+        </div>
+        <div id="player-container">
+          <h3>Player</h3>
+          <div id="player-hand"></div>
+        </div>
+        <div id="cash">
+          <div id="balance">Balance: {{User.balance}} </div>
+          <div id="winnings">Amount Won: </div>
+        </div>
+      </div>
 
-              <div id="actions">
-                <button id="deal" class="btn">Start Game</button>
-                <button id="hit" class="btn">Hit</button>
-                <button id="stand" class="btn">Stand</button>
-                {{!-- <button id="double" class="btn">Double Down</button>
-                <button id="split" class="btn">Split</button>
-                <button id="insurance" class="btn">Insurance</button> --}}
-                <button id="quit" class = "btn">Quit Game?</button>
-                    <div id = "bet-container">
-                        <button id ="bet-more">Bet More</button>
-                        <div id ="bet-amount">Currently Betting: </div>
-                        <button id ="bet-less">Bet Less</button>
-                    </div>
-                <button type="button" class="btn" data-toggle="modal" data-target="#staticBackdrop">
-                      Need a hint?
+      <div id="actions">
+        <button id="deal" class="btn">Start Game</button>
+        <button id="hit" class="btn">Hit</button>
+        <button id="stand" class="btn">Stand</button>
+        {{!-- <button id="double" class="btn">Double Down</button>
+        <button id="split" class="btn">Split</button>
+        <button id="insurance" class="btn">Insurance</button> --}}
+        <button id="quit" class="btn">Quit Game?</button>
+        <div id="bet-container">
+          <button id="bet-more">Bet More</button>
+          <div id="bet-amount">Currently Betting: </div>
+          <button id="bet-less">Bet Less</button>
+        </div>
+        <button type="button" class="btn" data-toggle="modal" data-target="#staticBackdrop">
+          Need a hint?
+        </button>
+
+        <!-- modal -->
+        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Here's a Hint</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
                 </button>
-
-                <!-- modal -->
-                    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Here's a Hint</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            Hint: 
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-        </main>
-<script src="./script.js"></script>
-
-</body>
+              </div>
+              <div class="modal-body">
+                Hint:
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+  </main>
+</div>
+<script src="/js/tableGame.js"></script>
