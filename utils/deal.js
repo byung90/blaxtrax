@@ -1,4 +1,6 @@
 const { Hand, Bet, Table, TablePlayer, User, Card } = require('../models');
+const sequelize = require('../config/connection');
+const { QueryTypes } = require('sequelize');
 
 const createHands = async (hands) => {
   try {
@@ -35,6 +37,21 @@ const createBets = async (betAmounts) => {
   }
 }
 
+const updateBalance = async (user) => {
+  try {
+    const updatedBalanceData = await User.update(user, {
+      where: {
+        id: user.id
+      },
+      fields: ['balance']
+    });
+    return betData
+  }
+  catch (err) {
+    return (err);
+  }
+}
+
 const getCard = async (card) => {
   // Check and assign if randomCardIndex does not exist
   try {
@@ -54,31 +71,13 @@ const getUniqueCard = async (tableId) => {
     let doesRandomCardIndexExist = true;
     while (doesRandomCardIndexExist) {
       randomCardIndex = Math.floor(Math.random() * 52);
-      const checkRandomCardIndexExist = await Card.findOne({
-        include: [
-          {
-            model: Hand, include: [
-              {
-                model: Bet, include: [
-                  {
-                    model: TablePlayer, include: [
-                      {
-                        model: Table, where: {
-                          id: tableId
-                        }
-                      }
-                    ],
-                  },
-                ]
-              },
-            ]
-          },
-        ],
-        where: {
-          cardArrayIndex: randomCardIndex
-        }
-      })
-      if (checkRandomCardIndexExist === null) {
+      const checkRandomCardIndexExist = await sequelize.query("SELECT card_array_index FROM card JOIN hand ON card.hand_id = hand.id JOIN bet ON bet.id = hand.bet_id JOIN tablePlayer ON tablePlayer.id = bet.table_player_id JOIN `table` ON table.id = tablePlayer.table_id WHERE table.id=? and card.card_array_index=?", {
+        replacements: [tableId, randomCardIndex],
+        nest: false,
+        raw: true,
+        type: QueryTypes.SELECT
+      });
+      if (checkRandomCardIndexExist.length === 0) {
         doesRandomCardIndexExist = false;
       }
     }
@@ -132,5 +131,6 @@ module.exports = {
   createBets,
   getUniqueCard,
   getCard,
-  isDeckPlayable
+  isDeckPlayable,
+  updateBalance
 };

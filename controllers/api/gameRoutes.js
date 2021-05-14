@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { User, TablePlayer, Table, Bet, Hand, Card } = require("../../models");
-const { createHands, getTable, createBets, getCard, getUniqueCard, isDeckPlayable } = require('../../utils/deal');
+const { createHands, getTable, createBets, getCard, getUniqueCard, isDeckPlayable, updateBalance } = require('../../utils/deal');
 
 function sortByProperty(property) {
   return function (a, b) {
@@ -88,51 +88,6 @@ router.get("/table/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-// Get load game if table is in game (NOT MVP)
-router.post('/loadInGame', async (req, res) => {
-  try {
-    /* 
-    example req body : 
-    {
-      table_id: 1,
-      isInGame: true,
-      tablePlayerIds:[1,2],
-    }
-    -------------------
-    example response json if inGame is true
-    {
-      tablePlayers : [
-        {
-          id: 1,
-          bet: 0,
-          hand_id: 1
-          cards: [1,2]
-        },
-        {
-          id: 9,
-          bet: 10,
-          hand_id: 2
-          cards: [5,6]
-        },
-      ]
-    }
-    */
-
-    //fetch hands and cards for dealer and TablePlayer(s)
-    if (req.params.isInGame) {
-
-    }
-    // create hands for dealer and TablePlayer(s)
-    else {
-
-    }
-
-  }
-  catch (err) {
-
-  }
-})
 
 // Deal first hand
 router.post('/makeBets', async (req, res) => {
@@ -248,6 +203,7 @@ router.post('/makeBets', async (req, res) => {
           hand_id: handsCleanData[i].id,
           cardArrayIndex: randomCardIndex
         }
+        console.log(cardToCreate);
         const cardsData = await getCard(cardToCreate);
         console.log(cardsData);
         cleanCardData.push(cardsData.get({ plain: true }));
@@ -274,7 +230,8 @@ router.post('/makeBets', async (req, res) => {
 
       responseObject.tablePlayers[bet.position].hand.cards = findCardIndexs;
     });
-
+    console.log("check here:")
+    console.log(responseObject);
     res.status(200).json(responseObject);
   }
   catch (err) {
@@ -293,6 +250,8 @@ router.post('/addCard', async (req, res) => {
   */
   try {
     const uniqueCardIndex = await getUniqueCard(req.body.tableId);
+    console.log("hiii");
+    console.log(uniqueCardIndex);
     const cardToCreate = {
       hand_id: req.body.handId,
       cardArrayIndex: uniqueCardIndex
@@ -322,5 +281,19 @@ router.get('/:id/isPlayable', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.put('/updateBalance', async (req, res) => {
+  try {
+    const newBalanceObject = {
+      id: req.body.id,
+      balance: req.body.balance
+    }
+    const updatedBalanceData = await updateBalance(newBalanceObject);
+    res.status(200).json(updatedBalanceData);
+  }
+  catch (err) {
+    res.status(500).json(err);
+  }
+})
 
 module.exports = router;
