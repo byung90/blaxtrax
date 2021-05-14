@@ -94,16 +94,40 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
-router.get("/tableGame", (req, res) => {
-  if (req.session.logged_in) {
-    res.render("tableGame");
-    return;
+router.get("/tableGame", async (req, res) => {
+  try {
+    // Find the logged in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ["password"] },
+    });
+    console.log(userData);
+    const user = userData.get({ plain: true });
+
+    res.render("tableGame", {
+      ...user,
+      logged_in: true,
+    });
+  } catch (err) {
+    res.status(500).json(err);
   }
-  res.render("login");
 });
 
-router.get("/tableList", (req, res) =>{
-  res.render("tableList"); 
+router.get("/tableList", async (req, res) => {
+  try {
+    // Find the logged in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ["password"] },
+    });
+    console.log(userData);
+    const user = userData.get({ plain: true });
+
+    res.render("tableList", {
+      ...user,
+      logged_in: true,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
