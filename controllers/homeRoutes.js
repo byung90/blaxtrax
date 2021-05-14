@@ -98,4 +98,8 @@ router.get("/tableGame", (req, res) => {
   res.render("tableGame");
 });
 
+router.get("/tableList", (req, res) =>{
+  res.render("tableList"); 
+});
+
 module.exports = router;
