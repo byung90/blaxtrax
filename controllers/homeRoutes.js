@@ -95,7 +95,15 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/tableGame", (req, res) => {
-  res.render("tableGame");
+  if (req.session.logged_in) {
+    res.render("tableGame");
+    return;
+  }
+  res.render("login");
+});
+
+router.get("/tableList", (req, res) =>{
+  res.render("tableList"); 
 });
 
 module.exports = router;
