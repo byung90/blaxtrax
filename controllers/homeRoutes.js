@@ -129,9 +129,20 @@ router.get("/tableList", async (req, res) => {
     const tableNumbers = tables.map((obj) => obj.get({ plain: true }));
     console.log(tableNumbers);
 
+    const tablePl = await TablePlayer.findAll({
+      attributes: { include: [
+        "tablePlayer_id",
+        "table_id",
+        "user_id",
+      ]}
+    }); 
+    const players = tablePl.map((obj) => obj.get({ plain: true })); 
+    console.log(players); 
+
     res.render("tableList", {
       ...user,
       tableNumbers,
+      players,
       logged_in: true,
     });
   } catch (err) {

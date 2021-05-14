@@ -21,15 +21,14 @@
           {{#each tableNumbers as |tableNumber|}}
             <tr>
               <th scope = "row">{{tableNumber.table_id}}</th>
-              
-               {{!-- {{#if tableNumber.user_id > 9}} --}}
-                  {{!-- <td>1/1</td> --}}
-                    {{!-- {{#else}} --}}
+                {{!-- {{#if players.user_id.length '>' 1 }}
+               {{#if tableNumbers.user_id '>' 9}} 
+                  <td>1/1</td>
+                {{#else}} --}}
                       <td><a href="/tableGame">0/1</a></td>
-              {{!-- {{/if}}  --}}
-                        </tr> 
-           {{/each}} 
-            <!-- might have to go homeRoutes.js-->
+                {{!-- {{/if}}  --}}
+            </tr> 
+          {{/each}} 
 
           {{!-- <tr>
             <th scope="row" id="table1">{{table.id}}<a

@@ -6,3 +6,11 @@ fetch("/api/tableRoutes", {
   .then((data) => {
     console.log(data);
   });
+
+fetch("/api/tableRoutes/:id", {
+  method:"GET",
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+  });
