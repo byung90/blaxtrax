@@ -37,6 +37,8 @@ const cardArrayMap = ['AC', '2C', '3C', '4C', '5C', '6C', '7C', '8C', '9C', 'TC'
 router.get("/table/:id", async (req, res) => {
   /* example response json format
   {
+    "isDealerCardRevealed": false,
+    "minimum_bet" : 10,
     "tablePlayers": [
       {
         "id": 1,
@@ -64,18 +66,21 @@ router.get("/table/:id", async (req, res) => {
   try {
     //call table to get dealer and TablePlayer(s)
     const tableData = await getTable(req.params.id);
-
-    const isInGame = tableData.is_in_game;
+    const minBet = tableData.min_bet;
+    const isInGame = tableData.is_in_round;
     const isDealerCardRevealed = tableData.is_dealer_card_revealed;
     const tablePlayers = tableData.tablePlayers;
+    const tableId = tableData.id;
     let tablePlayersClean = tablePlayers.map(x => x.get({ plain: true }));
     tablePlayersClean.sort(sortByProperty('id'));
     console.log(tablePlayersClean);
 
     const returnData = {
+      minimum_bet: minBet,
       tablePlayers: tablePlayersClean,
       isInGame: isInGame,
-      isDealerCardRevealed: isDealerCardRevealed
+      isDealerCardRevealed: isDealerCardRevealed,
+      table_id: tableId
     }
 
     res.status(200).json(returnData);
@@ -85,7 +90,7 @@ router.get("/table/:id", async (req, res) => {
 });
 
 // Get load game if table is in game (NOT MVP)
-router.get('/loadInGame', async (req, res) => {
+router.post('/loadInGame', async (req, res) => {
   try {
     /* 
     example req body : 
@@ -278,7 +283,7 @@ router.post('/makeBets', async (req, res) => {
 })
 
 // Add a card
-router.post('/add-card', async (req, res) => {
+router.post('/addCard', async (req, res) => {
   /* 
   example request body:
   {
