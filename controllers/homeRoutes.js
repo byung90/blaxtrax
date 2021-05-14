@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Project, User } = require("../models");
+const { Project, User, TablePlayer } = require("../models");
 const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
@@ -121,8 +121,17 @@ router.get("/tableList", async (req, res) => {
     console.log(userData);
     const user = userData.get({ plain: true });
 
+    //Findings table_ids and ordering numerically
+    const tables = await TablePlayer.findAll(req.session.table_id, {
+      limit: 8,
+      order: [["table_id", "DESC"]],
+    });
+    const tableNumbers = tables.map((obj) => obj.get({ plain: true }));
+    console.log(tableNumbers);
+
     res.render("tableList", {
       ...user,
+      tableNumbers,
       logged_in: true,
     });
   } catch (err) {
