@@ -131,5 +131,6 @@ module.exports = {
   createBets,
   getUniqueCard,
   getCard,
-  isDeckPlayable
+  isDeckPlayable,
+  updateBalance
 };
