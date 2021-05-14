@@ -4,59 +4,98 @@
     <div id="game-container">
       <div id="dealer-container">
         <h3>Dealer</h3>
-        {{!-- {{#if gameInPlay}} --}}
-        <img class="dealerCard" src="img/cards/PH.png" alt="Placeholder">
-        {{!-- {{else}} --}}
         <div id="dealer-hand">
-          <img class="dealerCard" src="img/cards/BG.png" alt="Dealer_hideCard">
-          <img class="dealerCard" src="img/cards/2c.png" alt="Dealer_2ndCard">
-          <img class="dealerCard" src="img/cards/3D.png" alt="Dealer_2ndCard">
-          <img class="dealerCard" src="img/cards/4h.png" alt="Dealer_2ndCard">
-          <img class="dealerCard" src="img/cards/AC.png" alt="Dealer_2ndCard">
-          <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
-          <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
-          <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
-          <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
-          <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
+          <img class="dealerCard" src="img/cards/PH.png" alt="Dealer_hideCard">
         </div>
       </div>
       <div id="player-container">
         <h3>Player</h3>
-        {{!-- {{#if gameInPlay}} --}}
-        <img class="dealerCard" src="img/cards/PH.png" alt="Placeholder">
-        {{!-- {{else}} --}}
         <div id="player-hand">
-          <img class="dealerCard" src="img/cards/TD.png" alt="Dealer_hideCard">
-          <img class="dealerCard" src="img/cards/2c.png" alt="Dealer_2ndCard">
-          <img class="dealerCard" src="img/cards/3D.png" alt="Dealer_2ndCard">
-          <img class="dealerCard" src="img/cards/4h.png" alt="Dealer_2ndCard">
-          <img class="dealerCard" src="img/cards/AC.png" alt="Dealer_2ndCard">
-          <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
-          <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
-          <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
-          <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
-          <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
+          <img class="dealerCard" src="img/cards/PH.png" alt="Placeholder">
         </div>
       </div>
       <div id="cash">
-        <div id="balance">Balance: {{User.balance}} </div>
-        <div id="winnings">Amount Won: </div>
+        <div id="balance">Balance: </div>
       </div>
     </div>
 
     <div id="actions" class="dealbtn">
-      <button id="deal" class="btn dealbtn">Start Game</button>
-      <button id="hit" class="btn dealbtn">Hit</button>
-      <button id="stand" class="btn dealbtn">Stand</button>
+      <button id="deal" class="btn dealbtn" onClick="dealCards()">Start Game</button>
+      <button id="hit" class="btn dealbtn" onClick="addCard('player')">Hit</button>
+      <button id="stand" class="btn dealbtn" onClick="playDealer()">Stand</button>
       {{!-- <button id="double" class="btn">Double Down</button>
       <button id="split" class="btn">Split</button>
       <button id="insurance" class="btn">Insurance</button> --}}
-      <button id="quit" class="btn dealbtn">Quit Game?</button>
+      <button id="quit" class="btn dealbtn" onClick="addCard('dealer')">Quit Game?</button>
     </div>
     <div id="bet-container" class="row dealbtn">
-      <button id="bet-more" class="btn dealbtn">Bet More</button>
+      <button id="bet-more" class="btn dealbtn" onClick="increaseBet()">Bet More</button>
       <div id="bet-amount">Currently Betting: </div>
-      <button id="bet-less" class="btn dealbtn">Bet Less</button>
+      <button id="bet-less" class="btn dealbtn" onClick="decreaseBet()">Bet Less</button>
+    </div>
+
+
+    <!-- you lose modal -->
+    <div class=" modal fade" id="lose-modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+      aria-labelledby="lose-modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">You lost</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            You lose!
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- you win modal -->
+    <div class="modal fade" id="win-modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+      aria-labelledby="lose-modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">You win!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            You win!
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- you tie modal -->
+    <div class="modal fade" id="tie-modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+      aria-labelledby="lose-modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">You tie!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            You tie!
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- modal -->
