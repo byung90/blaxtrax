@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Project, User, TablePlayer } = require("../models");
+const { Project, User, TablePlayer, Table } = require("../models");
 const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
