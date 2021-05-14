@@ -80,12 +80,45 @@ h2 {
   text-align: center;
 }
 
+.dealerCard {
+  width: 200px;
+  height: 300px;
+}
+
 .btn {
   width: 17rem;
   color: #434343;
   background-color: #00ff9d70;
   border-color: #00ff9d70;
   border-radius: 10rem;
+}
+
+#actions {
+  position: relative;
+}
+
+#deal,
+#hit,
+#stand,
+#quit,
+#bet-more {
+  float: left;
+  width: 25%;
+}
+
+#bet-less {
+  float: right;
+  width: 25%;
+}
+
+#wrapper {
+  background-image: url("../img/1920_background.jpg");
+  text-align: center;
+  height: auto;
+}
+
+#bet-container {
+  justify-content: center;
 }
 
 #logout,
@@ -97,7 +130,7 @@ h2 {
 }
 
 #startGameBtn {
-  font-size: 2rem;
+  font-size: 1.8rem;
   width: 30rem;
   height: 3rem;
 }

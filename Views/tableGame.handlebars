@@ -1,16 +1,44 @@
-<body>
-    <div class = "flex-column justify-space-around container">
+<body >
+    <div class = "flex-column justify-space-around container" >
         <main class="container container-fluid mt-5">
             <div id="wrapper">
 
               <div id="game-container">
                 <div id="dealer-container">
                   <h3>Dealer</h3>
-                  <div id="dealer-hand"></div>
+                  {{!-- {{#if gameInPlay}} --}}
+                    <img class="dealerCard" src="img/cards/PH.png" alt="Placeholder">
+                  {{!-- {{else}} --}}
+                  <div id="dealer-hand">
+                    <img class="dealerCard" src="img/cards/BG.png" alt="Dealer_hideCard">
+                    <img class="dealerCard" src="img/cards/2c.png" alt="Dealer_2ndCard">
+                    <img class="dealerCard" src="img/cards/3D.png" alt="Dealer_2ndCard">
+                    <img class="dealerCard" src="img/cards/4h.png" alt="Dealer_2ndCard">
+                    <img class="dealerCard" src="img/cards/AC.png" alt="Dealer_2ndCard">
+                    <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
+                    <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
+                    <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
+                    <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
+                    <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
+                  </div>
                 </div>
                 <div id="player-container">
                   <h3>Player</h3>
-                  <div id="player-hand"></div>
+                  {{!-- {{#if gameInPlay}} --}}
+                  <img class="dealerCard" src="img/cards/PH.png" alt="Placeholder">
+                  {{!-- {{else}} --}}
+                  <div id="player-hand">
+                    <img class="dealerCard" src="img/cards/TD.png" alt="Dealer_hideCard">
+                    <img class="dealerCard" src="img/cards/2c.png" alt="Dealer_2ndCard">
+                    <img class="dealerCard" src="img/cards/3D.png" alt="Dealer_2ndCard">
+                    <img class="dealerCard" src="img/cards/4h.png" alt="Dealer_2ndCard">
+                    <img class="dealerCard" src="img/cards/AC.png" alt="Dealer_2ndCard">
+                    <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
+                    <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
+                    <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
+                    <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
+                    <img class="dealerCard" src="img/cards/2D.png" alt="Dealer_2ndCard">
+                  </div>
                 </div>
                 <div id="cash">
                   <div id="balance">Balance: {{User.balance}} </div>
@@ -18,22 +46,20 @@
                 </div>
               </div>
 
-              <div id="actions">
-                <button id="deal" class="btn">Start Game</button>
-                <button id="hit" class="btn">Hit</button>
-                <button id="stand" class="btn">Stand</button>
+              <div id="actions" class="dealbtn">
+                <button id="deal" class="btn dealbtn">Start Game</button>
+                <button id="hit" class="btn dealbtn">Hit</button>
+                <button id="stand" class="btn dealbtn">Stand</button>
                 {{!-- <button id="double" class="btn">Double Down</button>
                 <button id="split" class="btn">Split</button>
                 <button id="insurance" class="btn">Insurance</button> --}}
-                <button id="quit" class = "btn">Quit Game?</button>
-                    <div id = "bet-container">
-                        <button id ="bet-more">Bet More</button>
-                        <div id ="bet-amount">Currently Betting: </div>
-                        <button id ="bet-less">Bet Less</button>
-                    </div>
-                <button type="button" class="btn" data-toggle="modal" data-target="#staticBackdrop">
-                      Need a hint?
-                </button>
+                <button id="quit" class = "btn dealbtn">Quit Game?</button>
+              </div>
+              <div id = "bet-container" class="row dealbtn">
+                  <button id ="bet-more" class="btn dealbtn">Bet More</button>
+                  <div id ="bet-amount">Currently Betting: </div>
+                  <button id ="bet-less" class="btn dealbtn">Bet Less</button>
+              </div>
 
                 <!-- modal -->
                     <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -54,7 +80,13 @@
                         </div>
                       </div>
                     </div>
+  
         </main>
+
+        <footer class="form-group footer">
+          <h1>Spend more time studying.</h1>
+          <p>Copyright &copy; 2021 &mdash; Team BlaxJax</p>
+        </footer>
 <script src="./script.js"></script>
 
 </body>
