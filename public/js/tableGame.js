@@ -311,7 +311,42 @@ const quitGame = async () => {
   if (leaveGame.ok) {
     window.location.href = window.location.origin + "/profile";
   }
+}
 
+const getHelp = async () => {
+  let player_help_array = [];
+  let dealer_help_array = [];
+
+  player_cards.forEach(card => {
+    const firstChar = card.slice(0, 1);
+    if (!isNaN(Number(firstChar))) {
+      player_help_array.push(Number(firstChar));
+      dealer_help_array.push(Number(firstChar));
+    }
+    else {
+      if (firstChar !== 'A') {
+        player_help_array.push(10);
+        dealer_help_array.push(10);
+      }
+      else {
+        player_help_array.push(1);
+        dealer_help_array.push(1);
+      }
+    }
+  })
+
+  const helpObject = {
+    player_help_array,
+    dealer_help_array
+  }
+
+  const getHelpData = await fetch('/api/gameRoutes/getHelp', {
+    method: 'DELETE',
+    body: JSON.stringify(helpObject),
+    headers: { "Content-Type": "application/json" }
+  });
+
+  console.log(getHelpData.json());
 }
 
 loadTable();
