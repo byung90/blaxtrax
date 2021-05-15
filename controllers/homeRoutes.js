@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { User, Table, TablePlayer } = require("../models");
 const withAuth = require("../utils/auth");
+const { Op } = require('sequelize');
 
 router.get("/", async (req, res) => {
   try {
@@ -40,6 +41,11 @@ router.get("/profile", withAuth, async (req, res) => {
     const topFive = await User.findAll({
       limit: 5,
       order: [["balance", "DESC"]], //ASC
+      where: {
+        id: {
+          [Op.gt]: 8
+        }
+      }
     });
     const balanceObj = topFive.map((obj) => obj.get({ plain: true }));
     console.log(balanceObj);
@@ -63,13 +69,13 @@ router.get("/profile", withAuth, async (req, res) => {
     });
 
     let tableList = tableListData;
-
+    const userId = req.session.user_id
     tableList.forEach(table => {
       table.tablePlayerCount = tablePlayerData.filter((obj) => obj.table_id === table.id).length - 1;
+      table.thisUser = userId;
     });
 
     console.log(tableList);
-
 
     res.render("profile", {
       ...user,

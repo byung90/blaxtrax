@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { User, TablePlayer, Table, Bet, Hand, Card } = require("../../models");
-const { createHands, getTable, createBets, getCard, getUniqueCard, isDeckPlayable, updateBalance, resetCard } = require('./deal');
+const { createHands, getTable, createBets, getCard, getUniqueCard, isDeckPlayable, updateBalance, resetCard, leaveTable, joinTable } = require('./deal');
 
 function sortByProperty(property) {
   return function (a, b) {
@@ -300,6 +300,29 @@ router.delete('/resetDeck/:id', async (req, res) => {
   try {
     const resetCardData = await resetCard(req.params.id);
     res.status(200).json(resetCardData);
+  }
+  catch (err) {
+    res.status(500).json(err);
+  }
+})
+
+router.delete('/quitTable', async (req, res) => {
+  try {
+    const quitTableData = await leaveTable(req.body.tableId, req.body.userId);
+    res.status(200).json(quitTableData);
+  }
+  catch (err) {
+    res.status(500).json(err);
+  }
+})
+
+router.put('/joinTable', async (req, res) => {
+  console.log(req.body);
+  try {
+    const joinTableData = await joinTable(req.body.tableId, req.body.userId);
+    console.log(joinTableData);
+    const tablePlayerId = joinTableData[0];
+    res.status(200).json(tablePlayerId);
   }
   catch (err) {
     res.status(500).json(err);

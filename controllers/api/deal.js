@@ -147,6 +147,42 @@ const resetCard = async (tableId) => {
   }
 }
 
+const leaveTable = async (tableId, userId) => {
+  try {
+    const deleteTablePlayerData = await sequelize.query("DELETE tablePlayer FROM tablePlayer where tablePlayer.table_id=? and tablePlayer.user_id=?", {
+      replacements: [tableId, userId],
+      nest: false,
+      raw: true,
+      type: QueryTypes.DELETE
+    });
+    console.log(deleteTablePlayerData);
+    if (deleteBetsData === null) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  catch (err) {
+    return (err);
+  }
+}
+
+const joinTable = async (tableId, userId) => {
+  try {
+    const addTablePlayer = await sequelize.query("INSERT INTO tablePlayer (id, table_id, user_id) VALUES (DEFAULT, ?, ?)", {
+      replacements: [tableId, userId],
+      raw: true,
+      type: QueryTypes.INSERT
+    });
+
+    return addTablePlayer;
+  }
+  catch (err) {
+    return err
+  }
+}
+
 module.exports = {
   createHands,
   getTable,
@@ -155,5 +191,7 @@ module.exports = {
   getCard,
   isDeckPlayable,
   updateBalance,
-  resetCard
+  resetCard,
+  leaveTable,
+  joinTable
 };
