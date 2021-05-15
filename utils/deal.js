@@ -125,6 +125,28 @@ const isDeckPlayable = async (tableId) => {
   }
 }
 
+// Reset card deck
+const resetCard = async (tableId) => {
+  try {
+    const deleteBetsData = await sequelize.query("DELETE bet FROM bet JOIN tablePlayer ON bet.table_player_id = tablePlayer.id JOIN `table` ON tablePlayer.table_id = table.id where table.id=?", {
+      replacements: [tableId],
+      nest: false,
+      raw: true,
+      type: QueryTypes.DELETE
+    });
+    console.log(deleteBetsData);
+    if (deleteBetsData === null) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  catch (err) {
+    return (err);
+  }
+}
+
 module.exports = {
   createHands,
   getTable,
@@ -132,5 +154,6 @@ module.exports = {
   getUniqueCard,
   getCard,
   isDeckPlayable,
-  updateBalance
+  updateBalance,
+  resetCard
 };
