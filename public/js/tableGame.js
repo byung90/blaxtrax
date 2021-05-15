@@ -104,6 +104,14 @@ const dealCards = async () => {
         $("#bet-more").attr('disabled', true);
         $("#bet-less").attr('disabled', true);
 
+        // check if player has blackjack
+        const cardTotal = await checkCardTotal(player_type);
+        if (cardTotal[1] === 21) {
+          playerWins();
+          // enable to make new bet
+          $("#bet-more").attr('disabled', false);
+          $("#bet-less").attr('disabled', false);
+        }
       }
     }
     else {
@@ -156,9 +164,6 @@ const addCard = async (player_type) => {
       }
       if (cardTotal[1] === 21) {
         playerWins();
-        // enable to make new bet
-        $("#bet-more").attr('disabled', false);
-        $("#bet-less").attr('disabled', false);
       }
     }
 
@@ -244,6 +249,8 @@ const playerWins = () => {
   player_balance += bet_amount;
   updateBalance(player_balance);
   $("#balance").text(`Balance: ${player_balance}`);
+  $("#bet-more").attr('disabled', false);
+  $("#bet-less").attr('disabled', false);
 }
 
 const updateBalance = async (balance) => {
