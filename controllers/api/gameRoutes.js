@@ -330,13 +330,14 @@ router.put('/joinTable', async (req, res) => {
   }
 })
 
-router.get('/getHelp', async (req, res) => {
+router.post('/getHelp', async (req, res) => {
   try {
-    player_help_array = req.body.player_help_array;
-    dealer_help_array = req.body.dealer_help_array;
-
-    const helpRec = GetRecommendedPlayerAction(player_help_array, dealer_help_array, 1,
-      dealerCheckedBlackjack, {
+    const player_help_array = req.body.player_help_array;
+    const dealer_help_array = req.body.dealer_help_array;
+    console.log(player_help_array);
+    console.log(dealer_help_array);
+    const helpRec = blackjackHelper.GetRecommendedPlayerAction(player_help_array, dealer_help_array, 1,
+      false, {
       hitSoft17: false,             // Does dealer hit soft 17
       surrender: "none",           // Surrender offered - none, late, or early
       double: "none",               // Double rules - none, 10or11, 9or10or11, any
@@ -356,6 +357,7 @@ router.get('/getHelp', async (req, res) => {
       // bjc-simple (v1.4 or higher), or bjc-great
       // (v1.4 or higer) - see below for details
     });
+    console.log(helpRec);
 
     res.status(200).json(helpRec);
   }

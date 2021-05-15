@@ -98,14 +98,16 @@ const dealCards = async () => {
         $('#player-hand').append(`<img class="dealerCard" src="../img/cards/${player_cards[0]}.png" alt="Dealer_hideCard">`);
         $('#player-hand').append(`<img class="dealerCard" src="../img/cards/${player_cards[1]}.png" alt="Dealer_hideCard">`);
 
-        // enable hit and stand
+        // enable hit, hint and stand
         $("#hit").attr('disabled', false);
         $("#stand").attr('disabled', false);
+        $("#hint-button").attr('disabled', false);
         $("#bet-more").attr('disabled', true);
         $("#bet-less").attr('disabled', true);
 
+
         // check if player has blackjack
-        const cardTotal = await checkCardTotal(player_type);
+        const cardTotal = await checkCardTotal('player');
         if (cardTotal[1] === 21) {
           playerWins();
           // enable to make new bet
@@ -315,38 +317,55 @@ const quitGame = async () => {
 
 const getHelp = async () => {
   let player_help_array = [];
-  let dealer_help_array = [];
+  let dealer_help_card = [];
 
   player_cards.forEach(card => {
     const firstChar = card.slice(0, 1);
     if (!isNaN(Number(firstChar))) {
       player_help_array.push(Number(firstChar));
-      dealer_help_array.push(Number(firstChar));
     }
     else {
       if (firstChar !== 'A') {
         player_help_array.push(10);
-        dealer_help_array.push(10);
       }
       else {
         player_help_array.push(1);
-        dealer_help_array.push(1);
       }
     }
   })
 
+  const firstDealerChar = dealer_cards[1].slice(0, 1);
+  if (!isNaN(Number(firstDealerChar))) {
+    dealer_help_card = Number(firstDealerChar);
+  }
+  else {
+    if (firstDealerChar !== 'A') {
+      dealer_help_card = 10;
+    }
+    else {
+      dealer_help_card = 1;
+    }
+  }
+
   const helpObject = {
-    player_help_array,
-    dealer_help_array
+    player_help_array: player_help_array,
+    dealer_help_array: dealer_help_card
   }
 
   const getHelpData = await fetch('/api/gameRoutes/getHelp', {
-    method: 'DELETE',
+    method: 'POST',
     body: JSON.stringify(helpObject),
     headers: { "Content-Type": "application/json" }
   });
 
-  console.log(getHelpData.json());
+  if (getHelpData.ok) {
+    const theHint = await getHelpData.json();
+    $('#hint-box').text(theHint);
+    const hintModal = new bootstrap.Modal(document.getElementById("hint-modal"), {});
+    hintModal.show();
+    console.log(theHint);
+  }
+
 }
 
 loadTable();

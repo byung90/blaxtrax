@@ -34,7 +34,7 @@
       <button id="bet-less" class="btn dealbtn" onClick="decreaseBet()">Bet Less</button>
     </div>
     <div id="bet-container" class="row dealbtn">
-      <button id="hint-button" class="btn dealbtn" onClick="getHelp()">Hint?</button>
+      <button id="hint-button" class="btn dealbtn" onClick="getHelp()" disabled="true">Hint?</button>
     </div>
 
 
@@ -112,8 +112,8 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            Hint:
+          <div class="modal-body" id="hint-box">
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
