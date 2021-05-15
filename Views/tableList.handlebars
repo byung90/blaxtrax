@@ -1,91 +1,37 @@
+<nav>
+  <h2>Pick a Table to Play</h2>
+</nav>
 
-  <nav>
-    <h2>Pick a Table to Play</h2>
-  </nav>
+<div class="container-table-list">
+  <div class="row justify-content-center mx-lg-n5">
+    <table class="tableList table-responsive-md table-bordered table-hover">
+      <thead>
+        <tr>
+          <div class="tableHead col-sm-6 py-3 px-lg-5">
+            <th scope="col">Table Number</th>
+          </div>
+          <div class="tableHead col-sm-6 py-3 px-lg-5">
+            <th scope="col">Number of People at Table</th>
+          </div>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each tableList as |table|}}
+        <tr>
+          <td scope="row" id="{{table.id}}">
+            <a href="/tableGame/{{table.id}}">{{table.id}}</a>
+          </td>
+          <td id="p2">
+            <a href="/tableGame/{{table.id}}">{{table.tablePlayerCount}}/1</a>
+          </td>
+        </tr>
+        {{/each}}
 
-  <div class="container-table-list">
-    <div class="row justify-content-center mx-lg-n5">
-      <table class="tableList table-responsive-md table-bordered table-hover">
-        <thead>
-          <tr>
-            <div class="tableHead col-sm-6 py-3 px-lg-5">
-              <th scope="col">Table Number</th>
-            </div>
-            <div class="tableHead col-sm-6 py-3 px-lg-5">
-              <th scope="col">Number of People at Table</th>
-            </div>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each tableNumbers as |tableNumber|}}
-            <tr>
-              <th scope = "row">{{tableNumber.table_id}}</th>
-              
-               {{!-- {{#if user_id >= 9}}
-                  <td>1/1</td>
-                    {{#else}}
-                      <td><a href="/tableGame"></a>0/1</td>
-              {{/if}}  --}}
-                        </tr> 
-           {{/each}} 
-            <!-- might have to go homeRoutes.js-->
+      </tbody>
 
-          {{!-- <tr>
-            <th scope="row" id="table1">{{table.id}}<a
-                href="/tableGame"
-              ></a></th>
-            <td id="p1"></td>
-            
-          </tr>
-          <tr>
-            <th scope="row" id="table2"><a
-                href="/tableGame"
-              ></a></th>
-            <td id="p2"></td>
-          </tr>
-          <tr>
-            <th scope="row" id="table3"><a
-                href="/tableGame"
-              ></a></a></th>
-            <td id="p3"></td>
-          </tr>
-          <tr>
-            <th scope="row" id="table4"><a
-                href="/tableGame"
-              ></a></th>
-            <td id="p4"></td>
-          </tr>
-          <tr>
-            <th scope="row" id="table5"><a
-                href="/tableGame"
-              ></a></th>
-            <td id="p5"></td>
-          </tr>
-          <tr>
-            <th scope="row" id="table6"><a
-                href="/tableGame"
-              ></a></th>
-            <td id="p6"></td>
-          </tr>
-          <tr>
-            <th scope="row" id="table7"><a
-                href="/tableGame"
-              ></a></th>
-            <td id="p7"></td>
-          </tr>
-          <tr>
-            <th scope="row" id="table8"><a
-                href="/tableGame"
-              ></a></th>
-            <td id="p8"></td>
-          </tr> --}}
-
-        </tbody>
-
-      </table>
-    </div>
+    </table>
   </div>
+</div>
 
-  <script src="../public/css/style.css"></script>
-  <script src="../public/js/tableList.js"></script>
-
+<script src="../public/css/style.css"></script>
+<script src="../public/js/tableList.js"></script>
