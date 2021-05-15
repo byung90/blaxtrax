@@ -75,6 +75,7 @@ Card.init(
     },
     hand_id: {
       type: DataTypes.INTEGER,
+      onDelete: 'CASCADE',
       references: {
         model: 'hand',
         key: 'id'

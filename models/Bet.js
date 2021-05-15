@@ -17,6 +17,7 @@ Bet.init(
     },
     tablePlayer_id: {
       type: DataTypes.INTEGER,
+      onDelete: 'CASCADE',
       references: {
         model: 'tablePlayer',
         key: 'id'

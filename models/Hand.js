@@ -14,6 +14,7 @@ Hand.init(
     bet_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      onDelete: 'CASCADE',
       references: {
         model: 'bet',
         key: 'id'
