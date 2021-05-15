@@ -122,32 +122,38 @@ router.get("/tableList", async (req, res) => {
     const user = userData.get({ plain: true });
 
     //Findings table_ids and ordering numerically
-    const tables = await TablePlayer.findAll(req.session.table_id, {
-      limit: 8,
+    const tables = await TablePlayer.findAll({
       order: [["table_id", "DESC"]],
     });
-    const tableNumbers = tables.map((obj) => obj.get({ plain: true }));
+
+    const tableNumbers = tables.map((obj) => obj.get({ plain: true }))
     console.log(tableNumbers);
 
-    const tablePl = await TablePlayer.findAll({
-      attributes: { include: [
-        "tablePlayer_id",
-        "table_id",
-        "user_id",
-      ]}
-    }); 
-    const players = tablePl.map((obj) => obj.get({ plain: true })); 
-    console.log(players); 
+    // for (var i = 0; i < tableNumbers.array ; i++) {
+    //   const tableNumb = await TablePlayer.findByPk({
+    //     include: [
+    //       {
+    //         model: Table,
+    //         attributes: ["id"]
+    //       },
+    //       {
+    //         model: User,
+    //         attributes: ["id"]
+    //       },
+    //     ]
+    //   })
+    //   console.log(tableNumb)
+    // }
 
     res.render("tableList", {
       ...user,
       tableNumbers,
-      players,
       logged_in: true,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 
 module.exports = router;
