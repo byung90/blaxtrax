@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { User, TablePlayer, Table, Bet, Hand, Card } = require("../../models");
-const { createHands, getTable, createBets, getCard, getUniqueCard, isDeckPlayable, updateBalance } = require('./deal');
+const { createHands, getTable, createBets, getCard, getUniqueCard, isDeckPlayable, updateBalance, resetCard } = require('./deal');
 
 function sortByProperty(property) {
   return function (a, b) {
@@ -290,6 +290,16 @@ router.put('/updateBalance', async (req, res) => {
     }
     const updatedBalanceData = await updateBalance(newBalanceObject);
     res.status(200).json(updatedBalanceData);
+  }
+  catch (err) {
+    res.status(500).json(err);
+  }
+})
+
+router.delete('/resetDeck/:id', async (req, res) => {
+  try {
+    const resetCardData = await resetCard(req.params.id);
+    res.status(200).json(resetCardData);
   }
   catch (err) {
     res.status(500).json(err);
