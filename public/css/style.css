@@ -106,6 +106,15 @@ h2 {
   width: 25%;
 }
 
+#cash {
+  padding: 1rem;
+}
+
+#balance,
+#winnings {
+  padding: 0.5rem;
+}
+
 #bet-less {
   float: right;
   width: 25%;
@@ -119,6 +128,7 @@ h2 {
 
 #bet-container {
   justify-content: center;
+  padding: 1rem 0;
 }
 
 #logout,
