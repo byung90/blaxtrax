@@ -13,6 +13,9 @@
           <div class="tableHead col-sm-6 py-3 px-lg-5">
             <th scope="col">Number of People at Table</th>
           </div>
+          <div class="tableHead col-sm-6 py-3 px-lg-5">
+            <th scope="col">Minimum Bet</th>
+          </div>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +26,9 @@
           </td>
           <td id="p2">
             <a href="/tableGame/{{table.id}}">{{table.tablePlayerCount}}/1</a>
+          </td>
+          <td id="p3">
+            <a href="/tableGame/{{table.id}}">{{table.min_bet}}</a>
           </td>
         </tr>
         {{/each}}
