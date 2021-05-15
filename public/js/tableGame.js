@@ -150,6 +150,7 @@ const addCard = async (player_type) => {
     if (player_type === 'player') {
       player_cards.push(newCard.newCard);
       $('#player-hand').append(`<img class="dealerCard" src="../img/cards/${newCard.newCard}.png" alt="Dealer_hideCard">`);
+      $("#hint-button").attr('disabled', false);
     }
     else {
       dealer_cards.push(newCard.newCard);
@@ -177,6 +178,7 @@ const playDealer = () => {
   //disable hit and stand CTA
   $("#hit").attr('disabled', true);
   $("#stand").attr('disabled', true);
+  $("#hint-button").attr('disabled', true);
   // reveal hidden card
   $('#dealer-hand').children().remove();
   $('#dealer-hand').append(`<img class="dealerCard" src="../img/cards/${dealer_cards[0]}.png" alt="Dealer_hideCard">`);
