@@ -1,16 +1,22 @@
 const router = require("express").Router();
-const { Table, TablePlayer } = require("../../models");
+const { Table, TablePlayer, User } = require("../../models");
 
 //Get all tables
 router.get('/', async (req, res) => {
   try {
-    const tableData = await Table.findAll({
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ["password"] },
+    });
+    const user = userData.get({ plain: true });
+
+    const tableListData = await Table.findAll({
       include: [{ model: TablePlayer }]
     });
-    res.status(200).json(tableData);
+    const tableList = tableListData.get({ plain: true });
+    res.status(200).json(tableList);
   }
   catch (err) {
-    res.status(500).json(err);
+    res.status(500).json(err)
   }
 });
 

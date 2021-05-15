@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Project, User } = require("../models");
+const { User, Table, TablePlayer } = require("../models");
 const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
@@ -51,38 +51,37 @@ router.get("/profile", withAuth, async (req, res) => {
     const loserObj = loser.map((obj) => obj.get({ plain: true }));
     console.log(loserObj);
 
+
+    const tableListData = await Table.findAll({
+      nest: true,
+      raw: true,
+    });
+
+    const tablePlayerData = await TablePlayer.findAll({
+      nest: true,
+      raw: true,
+    });
+
+    let tableList = tableListData;
+
+    tableList.forEach(table => {
+      table.tablePlayerCount = tablePlayerData.filter((obj) => obj.table_id === table.id).length - 1;
+    });
+
+    console.log(tableList);
+
+
     res.render("profile", {
       ...user,
       balanceObj,
       loserObj,
+      tableList,
       logged_in: true,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
-//table game
-
-// router.get("/profile", async (req, res) => {
-//   console.log("Hello");
-//   try {
-//     const userData = await User.findByPk(req.session.user_id, {
-//             attributes: { exclude: ["password"] },
-//     });
-//     const topFive = await User.findAll({
-//       limit: 5,
-//       order: [["balance", "DESC"]], //ASC
-//     });
-//     const balanceObj = topFive.map((obj) => obj.get({ plain: true }));
-//     console.log(balanceObj);
-//     res.render("profile", {
-//       balanceObj,
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 
 router.get("/login", (req, res) => {
   // If the user is already logged in, redirect the request to another route
@@ -94,7 +93,7 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
-router.get("/tableGame", async (req, res) => {
+router.get("/tableGame/:id", withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
@@ -118,11 +117,31 @@ router.get("/tableList", async (req, res) => {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ["password"] },
     });
-    console.log(userData);
     const user = userData.get({ plain: true });
+    console.log(user);
+
+    const tableListData = await Table.findAll({
+      nest: true,
+      raw: true,
+    });
+
+    const tablePlayerData = await TablePlayer.findAll({
+      nest: true,
+      raw: true,
+    });
+
+    let tableList = tableListData;
+
+    tableList.forEach(table => {
+      table.tablePlayerCount = tablePlayerData.filter((obj) => obj.table_id === table.id).length - 1;
+    });
+
+    console.log(tableList);
+
 
     res.render("tableList", {
       ...user,
+      tableList,
       logged_in: true,
     });
   } catch (err) {

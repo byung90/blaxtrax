@@ -81,12 +81,12 @@ const dealCards = async () => {
     $('#player-hand').children().remove();
 
     // display dealer cards
-    $('#dealer-hand').append(`<img class="dealerCard" src="img/cards/BG.png" alt="Dealer_hideCard">`);
-    $('#dealer-hand').append(`<img class="dealerCard" src="img/cards/${dealer_cards[1]}.png" alt="Dealer_hideCard">`);
+    $('#dealer-hand').append(`<img class="dealerCard" src="../img/cards/BG.png" alt="Dealer_hideCard">`);
+    $('#dealer-hand').append(`<img class="dealerCard" src="../img/cards/${dealer_cards[1]}.png" alt="Dealer_hideCard">`);
 
     // display player cards
-    $('#player-hand').append(`<img class="dealerCard" src="img/cards/${player_cards[0]}.png" alt="Dealer_hideCard">`);
-    $('#player-hand').append(`<img class="dealerCard" src="img/cards/${player_cards[1]}.png" alt="Dealer_hideCard">`);
+    $('#player-hand').append(`<img class="dealerCard" src="../img/cards/${player_cards[0]}.png" alt="Dealer_hideCard">`);
+    $('#player-hand').append(`<img class="dealerCard" src="../img/cards/${player_cards[1]}.png" alt="Dealer_hideCard">`);
 
     // enable hit and stand
     $("#hit").attr('disabled', false);
@@ -122,7 +122,7 @@ const addCard = async (player_type) => {
     }
     else {
       dealer_cards.push(newCard.newCard);
-      $('#dealer-hand').append(`<img class="dealerCard" src="img/cards/${newCard.newCard}.png" alt="Dealer_hideCard">`);
+      $('#dealer-hand').append(`<img class="dealerCard" src="../img/cards/${newCard.newCard}.png" alt="Dealer_hideCard">`);
     }
 
     if (player_type === 'player') {
@@ -151,8 +151,8 @@ const playDealer = () => {
   $("#stand").attr('disabled', true);
   // reveal hidden card
   $('#dealer-hand').children().remove();
-  $('#dealer-hand').append(`<img class="dealerCard" src="img/cards/${dealer_cards[0]}.png" alt="Dealer_hideCard">`);
-  $('#dealer-hand').append(`<img class="dealerCard" src="img/cards/${dealer_cards[1]}.png" alt="Dealer_hideCard">`);
+  $('#dealer-hand').append(`<img class="dealerCard" src="../img/cards/${dealer_cards[0]}.png" alt="Dealer_hideCard">`);
+  $('#dealer-hand').append(`<img class="dealerCard" src="../img/cards/${dealer_cards[1]}.png" alt="Dealer_hideCard">`);
 
   // check card total
   const playerTotal = checkCardTotal('player');
@@ -267,6 +267,10 @@ const checkCardTotal = (player_type) => {
     }
   })
   return cardTotal;
+}
+
+const quitGame = async () => {
+
 }
 
 loadTable();

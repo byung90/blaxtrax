@@ -1,5 +1,5 @@
-const { Hand, Bet, Table, TablePlayer, User, Card } = require('../models');
-const sequelize = require('../config/connection');
+const { Hand, Bet, Table, TablePlayer, User, Card } = require('../../models');
+const sequelize = require('../../config/connection');
 const { QueryTypes } = require('sequelize');
 
 const createHands = async (hands) => {

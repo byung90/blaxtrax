@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { User, TablePlayer, Table, Bet, Hand, Card } = require("../../models");
-const { createHands, getTable, createBets, getCard, getUniqueCard, isDeckPlayable, updateBalance } = require('../../utils/deal');
+const { createHands, getTable, createBets, getCard, getUniqueCard, isDeckPlayable, updateBalance } = require('./deal');
 
 function sortByProperty(property) {
   return function (a, b) {
