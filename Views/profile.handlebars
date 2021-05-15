@@ -17,11 +17,14 @@
             <table class="tableList table-responsive-md table-bordered table-hover">
               <thead>
                 <tr>
-                  <div class="tableHead col-sm-6 py-3 px-lg-5">
+                  <div class="tableHead ">
                     <th scope="col">Table Number</th>
                   </div>
-                  <div class="tableHead col-sm-6 py-3 px-lg-5">
+                  <div class="tableHead ">
                     <th scope="col">Number of People at Table</th>
+                  </div>
+                  <div class="tableHead ">
+                  <th scope="col">Minimum Bet</th>
                   </div>
                 </tr>
               </thead>
@@ -29,7 +32,7 @@
                 {{#each tableList as |table|}}
                 <tr>
                   <td scope="row" id="{{table.id}}">
-                    <a href="/tableGame/{{table.id}}">{{table.id}}</a>
+                    <p>{{table.id}}</p>
                   </td>
                   <td id="p2">
                     {{#if (is_player_count_max table.tablePlayerCount)}}
@@ -38,6 +41,9 @@
                     <a href="/tableGame/{{table.id}}"
                       onClick="joinTable({{table.id}},{{table.thisUser}})">{{table.tablePlayerCount}}/1</a>
                     {{/if}}
+                  </td>
+                  <td id="p3">
+                    <a href="/tableGame/{{table.id}}">{{table.min_bet}}</a>
                   </td>
                 </tr>
                 {{/each}}
