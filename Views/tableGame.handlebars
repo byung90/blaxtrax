@@ -33,6 +33,9 @@
       <div id="bet-amount">Currently Betting: </div>
       <button id="bet-less" class="btn dealbtn" onClick="decreaseBet()">Bet Less</button>
     </div>
+    <div id="bet-container" class="row dealbtn">
+      <button id="hint-button" class="btn dealbtn" onClick="getHelp()" disabled="true">Hint?</button>
+    </div>
 
 
     <!-- you lose modal -->
@@ -98,8 +101,8 @@
       </div>
     </div>
 
-    <!-- modal -->
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    <!-- hint modal -->
+    <div class="modal fade" id="hint-modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
       aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -109,8 +112,8 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            Hint:
+          <div class="modal-body" id="hint-box">
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

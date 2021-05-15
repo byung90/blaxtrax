@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { User, TablePlayer, Table, Bet, Hand, Card } = require("../../models");
 const { createHands, getTable, createBets, getCard, getUniqueCard, isDeckPlayable, updateBalance, resetCard, leaveTable, joinTable } = require('./deal');
+const blackjackHelper = require("blackjack-strategy");
 
 function sortByProperty(property) {
   return function (a, b) {
@@ -328,5 +329,42 @@ router.put('/joinTable', async (req, res) => {
     res.status(500).json(err);
   }
 })
+
+router.post('/getHelp', async (req, res) => {
+  try {
+    const player_help_array = req.body.player_help_array;
+    const dealer_help_array = req.body.dealer_help_array;
+    console.log(player_help_array);
+    console.log(dealer_help_array);
+    const helpRec = blackjackHelper.GetRecommendedPlayerAction(player_help_array, dealer_help_array, 1,
+      false, {
+      hitSoft17: false,             // Does dealer hit soft 17
+      surrender: "none",           // Surrender offered - none, late, or early
+      double: "none",               // Double rules - none, 10or11, 9or10or11, any
+      doubleRange: [0, 21],         // Range of values you can double, 
+      // if set supercedes double (v1.1 or higher)
+      doubleAfterSplit: false,      // Can double after split
+      resplitAces: false,          // Can you resplit aces
+      offerInsurance: false,        // Is insurance offered
+      numberOfDecks: 1,            // Number of decks in play
+      maxSplitHands: 0,            // Max number of hands you can have due to splits
+      count: {                    // Structure defining the count (v1.3 or higher)
+        system: null,           // The count system - only "HiLo" is supported
+        trueCount: null
+      },     // The TrueCount (count / number of decks left)
+      strategyComplexity: "simple" // easy (v1.2 or higher), simple, advanced,
+      // exactComposition, bjc-supereasy (v1.4 or higher),
+      // bjc-simple (v1.4 or higher), or bjc-great
+      // (v1.4 or higer) - see below for details
+    });
+    console.log(helpRec);
+
+    res.status(200).json(helpRec);
+  }
+  catch (err) {
+    res.status(500).json(err);
+  }
+
+});
 
 module.exports = router;
